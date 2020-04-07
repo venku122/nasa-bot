@@ -4,11 +4,12 @@ const port = 8080; // default port to listen
 
 
 app.post( "/buzz", ( req, res )  => {
-    res.send( "Hello world!" );
+  console.log('buzz called');
+  res.json({ text: `${Date.now()} current time`});
 } );
 
 // start the Express server
 app.listen( port, () => {
-    //@ts-ignore
+    // @ts-ignore
     console.log( `server started at http://localhost:${ port }` );
 } );
