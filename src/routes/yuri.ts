@@ -64,9 +64,13 @@ const yuri = async (req: express.Request, res: express.Response) => {
       return res.status(200).json(NOT_FOUND_RESPONSE);
     }
 
-    const href = response.collection.items[0].links[0].href;
-    const title = response.collection.items[0].data[0].title;
-    const description = response.collection.items[0].data[0].description;
+    const { items } = response.collection;
+    const itemIndex = Math.round((Math.random() * items.length) + 1)
+
+    const item = items[itemIndex];
+    const href = item.links[0].href;
+    const title = item.data[0].title;
+    const description = item.data[0].description;
     const botPayload = {
       response_type: 'in_channel',
       text: `${title}`,
