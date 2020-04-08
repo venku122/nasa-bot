@@ -84,7 +84,7 @@ const yuri = async (req: express.Request, res: express.Response) => {
         }
       ]
     };
-
+    console.log(`returned item ${itemIndex} of ${items.length} for query: ${text}`);
     return res.json(botPayload);
 
   } catch (error) {
