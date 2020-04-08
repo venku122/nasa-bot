@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from 'body-parser';
+import request from 'request';
 const app = express();
 const port = 8080; // default port to listen
 
@@ -58,6 +59,19 @@ function generateBuzzword(text: string): string {
 
   return `${column1[Number.parseInt(indices[0], 10)]} ${column2[Number.parseInt(indices[1], 10)]} ${column3[Number.parseInt(indices[2], 10)]}`
 }
+
+app.post('/whoinspacern', (req, res) => {
+  console.log('whoinspacern called');
+  request.get('http://api.open-notify.org/astros.json', {json: true}, (error, response, body) => {
+    if (error) {
+      console.log('error checking satronauts', error);
+      res.status(500);
+    }
+    const peopleInSpace = body.number;
+    const answer = `There are ${peopleInSpace} people in space right now`;
+    res.json({ text: answer, response_type: 'in_channel' });
+  });
+})
 
 app.post( "/buzz", ( req, res )  => {
   console.log('buzz called');
