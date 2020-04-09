@@ -17,8 +17,8 @@ const whoInSpaceRn = async (req: express.Request, res: express.Response) => {
   try {
     const response: WhoInSpaceAPIResponse = await request.get('http://api.open-notify.org/astros.json', {json: true});
     const peopleInSpace = response.number;
-    const astronautNames = response.people.map((astronaut) => astronaut.name).join(' ');
-    const answer = `There are ${peopleInSpace} people in space right now: ${astronautNames},`;
+    const astronautNames = response.people.map((astronaut) => astronaut.name).join(' ,');
+    const answer = `There are ${peopleInSpace} people in space right now: ${astronautNames}`;
     res.json({ text: answer, response_type: 'in_channel' });
 
   } catch(error) {
